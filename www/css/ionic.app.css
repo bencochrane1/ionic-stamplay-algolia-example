@@ -9578,14 +9578,13 @@ ion-header-bar.search-top.bar.bar-header {
 ion-item.item-avatar h2 {
   line-height: 36px; }
 
-.hit.item-remove-animate.item-avatar {
-  /*   h2 {
-  font-size: 10px;
-  line-he: ;
-} */ }
-  .hit.item-remove-animate.item-avatar img {
-    position: relative;
-    right: 70px; }
+.hit.item-remove-animate.item-avatar img {
+  position: relative;
+  right: 70px; }
 
 .hit.item-remove-animate.item-avatar {
   padding-left: 0; }
+
+div#hits {
+  position: relative;
+  top: 18px; }
