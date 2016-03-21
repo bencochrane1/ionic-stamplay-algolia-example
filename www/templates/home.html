@@ -1,0 +1,23 @@
+<ion-view>
+  <ion-content class="home">
+    
+    <div>
+      <div ng-hide="user">
+        <div>
+          <button ui-sref="login" class="button button-full button-balanced bold">Login</button>
+          <button ui-sref="signup" class="button button-full button-positive bold">Signup</button>
+        </div>
+        <div class="center-align">
+          <b class="or">or</b>
+        </div>
+        <div>
+          <button ui-sref="tasks" class="button button-full button-dark bold">Continue as Guest</button>
+        </div>
+      </div>
+      <div ng-show="user" ng-controller="AccountController as account">
+        <button ui-sref="tasks" class="button button-full button-dark bold">My Tasks</button>
+        <button ng-click="account.logout()" class="button button-full button-stable bold">Logout</button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

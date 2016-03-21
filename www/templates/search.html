@@ -1,0 +1,54 @@
+<ion-header-bar class="search-top">
+  <div class="bar bar-header item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input id="q" ng-focus="vm.showCancel = true" type="search" placeholder="Search">
+    </label>
+    <button ng-if="vm.showCancel" ng-click="vm.showCancel = false" class="button button-clear">
+      Cancel
+    </button>
+  </div>
+</ion-header-bar>
+<ion-view>
+  <ion-content>
+
+    <div class="container-fluid">
+      <div class="content-wrapper">
+
+        <div class="results-wrapper">
+          <section id="results-topbar">
+            <div class="sort-by">
+              <div id="sort-by-selector"></div>
+            </div>
+            <div id="stats" class="text-muted"></div>
+          </section>
+          <main id="hits"></main>
+          <section id="pagination"></section>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+    <ion-list id="hits">
+<!--       <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+  <img ng-src="http://www.fillmurray.com/200/300">
+  <h2>Fill Murray</h2>
+  <i class="icon ion-chevron-right icon-accessory"></i>
+</ion-item>
+<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+  <img ng-src="http://www.fillmurray.com/200/300">
+  <h2>Fill Murray</h2>
+  <i class="icon ion-chevron-right icon-accessory"></i>
+</ion-item>
+<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+  <img ng-src="http://www.fillmurray.com/200/300">
+  <h2>Fill Murray</h2>
+  <i class="icon ion-chevron-right icon-accessory"></i>
+</ion-item> -->
+    </ion-list>
+  </ion-content>
+</ion-view>
