@@ -2,11 +2,11 @@
   <div class="bar bar-header item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-ios-search placeholder-icon"></i>
-      <input id="q" ng-focus="vm.showCancel = true" type="search" placeholder="Search">
+      <input ng-model="vm.query" ng-change="vm.updateResults()" ng-focus="vm.showCancel = true" type="search" placeholder="Search">
     </label>
-    <button ng-if="vm.showCancel" ng-click="vm.showCancel = false" class="button button-clear">
-      Cancel
-    </button>
+<!--     <button ng-if="vm.showCancel" ng-click="vm.showCancel = false" class="button button-clear">
+  Cancel
+</button> -->
   </div>
 </ion-header-bar>
 <ion-view>
@@ -29,35 +29,28 @@
   </div>
 </div> -->
 
-<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+<!-- <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
   <section id="results-topbar">
     <div class="sort-by">
       <div id="sort-by-selector"></div>
     </div>
     <div id="stats" class="text-muted"></div>
   </section>
-</ion-item>
-
-
-
-
-    <ion-list id="hits">
-<!--       <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
-  <img ng-src="http://www.fillmurray.com/200/300">
-  <h2>Fill Murray</h2>
-  <i class="icon ion-chevron-right icon-accessory"></i>
-</ion-item>
-<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
-  <img ng-src="http://www.fillmurray.com/200/300">
-  <h2>Fill Murray</h2>
-  <i class="icon ion-chevron-right icon-accessory"></i>
-</ion-item>
-<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
-  <img ng-src="http://www.fillmurray.com/200/300">
-  <h2>Fill Murray</h2>
-  <i class="icon ion-chevron-right icon-accessory"></i>
 </ion-item> -->
+
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+        <h2>{{ vm.resultsCount }} results in {{ vm.processingTime }} ms</h2>
+      </ion-item>
     </ion-list>
-    <section id="pagination"></section>
+
+    <ion-list>
+      <ion-item ng-repeat="result in vm.searchResults" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+        <img class="results-image" ng-src="{{ result.image }}">
+        <h2>{{ result.name }}</h2>
+        <h3>${{ result.price }}</h3>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

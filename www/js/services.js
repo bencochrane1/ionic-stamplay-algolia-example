@@ -3,26 +3,23 @@ angular.module('starter.services', [])
 .factory('SearchService', ["$q", "algolia", function($q, algolia) {
 
   return {
-    getInitialCategories: getInitialCategories
+    getResults: getResults
   }
 
-  function getInitialCategories() {
-      var deferredCategories = $q.defer();
-
+  function getResults(query) {
+      var deferred = $q.defer();
       var client = algolia.Client('Y3KUQGJC1Z', '37bde7e896afa5b1ad075b1d96a1ca30');
       var index = client.initIndex('instant-search');
-      var query = '';
 
-      index.search(query, { facets: 'categories' })
+      index.search(query)
       .then(function(data) {
-        console.log(data);
-        deferredCategories.resolve(data.hits);
+        deferred.resolve(data);
       })
       .catch(function(data) {
-        deferredCategories.resolve([]);
+        deferred.resolve([]);
       });
 
-      return deferredCategories.promise;
+      return deferred.promise;
 
   }
 
