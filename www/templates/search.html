@@ -2,47 +2,22 @@
   <div class="bar bar-header item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-ios-search placeholder-icon"></i>
-      <input ng-model="vm.query" ng-change="vm.updateResults()" ng-focus="vm.showCancel = true" type="search" placeholder="Search">
+      <input ng-model="vm.query.name" ng-change="vm.updateResults()" ng-focus="vm.showCancel = true" type="search" placeholder="Search">
     </label>
-<!--     <button ng-if="vm.showCancel" ng-click="vm.showCancel = false" class="button button-clear">
-  Cancel
-</button> -->
   </div>
 </ion-header-bar>
 <ion-view>
   <ion-content>
-
-<!--     <div class="container-fluid">
-  <div class="content-wrapper">
-
-    <div class="results-wrapper">
-      <section id="results-topbar">
-        <div class="sort-by">
-          <div id="sort-by-selector"></div>
-        </div>
-        <div id="stats" class="text-muted"></div>
-      </section>
-      <main id="hits"></main>
-
-    </div>
-
-  </div>
-</div> -->
-
-<!-- <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
-  <section id="results-topbar">
-    <div class="sort-by">
-      <div id="sort-by-selector"></div>
-    </div>
-    <div id="stats" class="text-muted"></div>
-  </section>
-</ion-item> -->
 
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
         <h2>{{ vm.resultsCount }} results in {{ vm.processingTime }} ms</h2>
       </ion-item>
     </ion-list>
+
+    <rzslider rz-slider-model="vm.slider.minValue"
+              rz-slider-high="vm.slider.maxValue"
+              rz-slider-options="vm.slider.options"></rzslider>
 
     <ion-list>
       <ion-item ng-repeat="result in vm.searchResults" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">

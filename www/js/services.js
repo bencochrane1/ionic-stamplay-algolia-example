@@ -11,7 +11,9 @@ angular.module('starter.services', [])
       var client = algolia.Client('Y3KUQGJC1Z', '37bde7e896afa5b1ad075b1d96a1ca30');
       var index = client.initIndex('instant-search');
 
-      index.search(query)
+      index.search(query.name, {
+        numericFilters: 'price:' + query.minPrice + ' to ' + query.maxPrice
+      })
       .then(function(data) {
         deferred.resolve(data);
       })

@@ -1,13 +1,34 @@
 angular.module('starter.controllers', [])
 
-.controller('SearchController', ["TaskService", "$ionicLoading", "$rootScope", "$state", "SearchService", function(TaskService,  $ionicLoading, $rootScope, $state, SearchService) {
+.controller('SearchController', ["TaskService", "$ionicLoading", "$rootScope", "$state", "SearchService", "$scope", function(TaskService,  $ionicLoading, $rootScope, $state, SearchService, $scope) {
   var vm = this;
 
   vm.showCancel = false;
-  vm.query = '';
+  vm.query = {
+    name: '',
+    minPrice: 0,
+    maxPrice: 600
+  }
   vm.updateResults = updateResults;
 
-  SearchService.getResults()
+  vm.slider = {
+      minValue: 0,
+      maxValue: 600,
+      options: {
+          floor: 0,
+          ceil: 600,
+          step: 10,
+          noSwitching: true
+      }
+  };
+
+  $scope.$on("slideEnded", function() {
+     vm.query.minPrice = vm.slider.minValue;
+     vm.query.maxPrice = vm.slider.maxValue;
+     updateResults();
+  });
+
+  SearchService.getResults(vm.query)
   .then(function(res) {
     vm.searchResults = res.hits;
     vm.processingTime = res.processingTimeMS;
@@ -28,96 +49,6 @@ angular.module('starter.controllers', [])
       console.error(err);
     });
   }
-
-  // var search = instantsearch({
-  //   appId: 'Y3KUQGJC1Z',
-  //   apiKey: '37bde7e896afa5b1ad075b1d96a1ca30',
-  //   indexName: 'instant-search'
-  // });
-  //
-  // search.addWidget(
-  //   instantsearch.widgets.searchBox({
-  //     container: '#q',
-  //     placeholder: 'Search a product'
-  //   })
-  // );
-  //
-  // search.addWidget(
-  //   instantsearch.widgets.stats({
-  //     container: '#stats'
-  //   })
-  // );
-  //
-  // search.on('render', function() {
-  //   $('.product-picture img').addClass('transparent');
-  //   $('.product-picture img').one('load', function() {
-  //       $(this).removeClass('transparent');
-  //   }).each(function() {
-  //       if(this.complete) $(this).load();
-  //   });
-  // });
-  //
-  // var hitTemplate =
-  //   '<ion-item class="hit item-remove-animate item-avatar" type="item-text-wrap">' +
-  //     '<img src="{{ image }}">' +
-  //     '<p>{{{ _highlightResult.name.value }}}</p>' +
-  //     '<p>{{{ _highlightResult.type.value }}}</p>' +
-  //     '<p>${{ price }}</p>' +
-  //     '<i class="icon ion-chevron-right icon-accessory"></i>' +
-  //   '</ion-item>';
-  //
-  // var noResultsTemplate =
-  //   '<div class="text-center">No results found matching <strong>{{query}}</strong>.</div>';
-  //
-  // var menuTemplate =
-  //   '<a href="javascript:void(0);" class="facet-item {{#isRefined}}active{{/isRefined}}"><span class="facet-name"><i class="fa fa-angle-right"></i> {{name}}</span class="facet-name"></a>';
-  //
-  //   var menuTemplate =
-  //     '<a>show some stuff</a>';
-  //
-  // var facetTemplateCheckbox =
-  //   '<a href="javascript:void(0);" class="facet-item">' +
-  //     '<input type="checkbox" class="{{cssClasses.checkbox}}" value="{{name}}" {{#isRefined}}checked{{/isRefined}} />{{name}}' +
-  //     '<span class="facet-count">({{count}})</span>' +
-  //   '</a>';
-  //
-  // var facetTemplateColors =
-  //   '<a href="javascript:void(0);" data-facet-value="{{name}}" class="facet-color {{#isRefined}}checked{{/isRefined}}"></a>';
-  //
-  // search.addWidget(
-  //   instantsearch.widgets.hits({
-  //     container: '#hits',
-  //     hitsPerPage: 16,
-  //     templates: {
-  //       empty: noResultsTemplate,
-  //       item: hitTemplate
-  //     },
-  //     transformData: function(hit) {
-  //       hit.stars = [];
-  //       for (var i = 1; i <= 5; ++i) {
-  //         hit.stars.push(i <= hit.rating);
-  //       }
-  //       return hit;
-  //     }
-  //   })
-  // );
-  //
-  // search.addWidget(
-  //   instantsearch.widgets.pagination({
-  //     container: '#pagination',
-  //     cssClasses: {
-  //       active: 'active'
-  //     },
-  //     labels: {
-  //       previous: '<i class="fa fa-angle-left fa-2x"></i> Previous page',
-  //       next: 'Next page <i class="fa fa-angle-right fa-2x"></i>'
-  //     },
-  //     showFirstLast: false
-  //   })
-  // );
-  //
-  // search.start();
-
 }])
 
 .controller('AccountController', ["AccountService", "$state", "$rootScope", "$ionicLoading", "$ionicPopup", function(AccountService, $state, $rootScope, $ionicLoading, $ionicPopup) {

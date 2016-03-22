@@ -5,6 +5,7 @@
     "ionic": "driftyco/ionic-bower#1.2.4"
   },
   "dependencies": {
-    "algoliasearch": "3"
+    "algoliasearch": "3",
+    "angularjs-slider": "~2.10.4"
   }
 }
